@@ -31,12 +31,12 @@ const User = require("./models/user.js")
 
 
 
-// mongoose.connect('mongodb://127.0.0.1:27017/wonderlust');
-const dburl = process.env.ATLASDB_URL
-async function main() {
-    await mongoose.connect(dburl)
-}
-mongoose.connect(dburl);
+mongoose.connect('mongodb://127.0.0.1:27017/wonderlust');
+// const dburl = process.env.ATLASDB_URL
+// async function main() {
+//     await mongoose.connect(dburl)
+// }
+// mongoose.connect(dburl);
 
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }));
@@ -46,20 +46,20 @@ app.use(express.static(path.join(__dirname, "/public")))
 
 
 
-const store = MongoStore.create({
-    mongoUrl: dburl,
-    crypto: {
-        secret: process.env.SECRET,
-    },
-    touchAfter:  24 * 3600,
-});
+// const store = MongoStore.create({
+//     mongoUrl: dburl,
+//     crypto: {
+//         secret: process.env.SECRET,
+//     },
+//     touchAfter:  24 * 3600,
+// });
 
-store.on("error",(err)=>{
-    console.log("Error in Mongo Session Store",err)
-})
+// store.on("error",(err)=>{
+//     console.log("Error in Mongo Session Store",err)
+// })
 
 const sessionOptions = {
-    store:store,
+    // store:store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
