@@ -50,6 +50,31 @@
             padding: 0rem 0rem 0rem 0.5rem;
         }
     }
+    
+   .navbar-inphone{
+    background-color: #fe424f60;
+    position: absolute;
+
+    top: 0;
+    right: -80vw;
+    padding: 5px;
+    width: 80vw;
+    height: 100vh;
+     /* border: 2px solid; */
+    backdrop-filter: blur(15px);
+    border-radius: 20px 0 0 20px;
+
+   }
+
+   .cross{
+    cursor: pointer;
+   }
+  
+
+
+
+ 
+
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
@@ -64,10 +89,94 @@
         </lord-icon>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+        <button class="navbar-toggler abc color-dark" type="button" data-bs-toggle="collapse" >
             <span class="navbar-toggler-icon"></span>
         </button>
+          
 
+        
+
+
+
+
+
+         <div class="navbar-inphone" id="">
+            
+
+            <div class="cross p-2 ">
+                <i class="fa-solid fa-xmark cross-icon fa-lg"></i> 
+            </div>
+
+
+
+
+            <div class="navbar-nav ms-2 mt-1 explore">
+
+                <a class="nav-link inter" href="/listings">
+                    <div class="explore">Explore </div>
+                </a>
+
+            </div>
+
+
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex inter">
+                    <input class="form-control me-2 search-inpp" type="search" placeholder="Search destinations ">
+                    <button class="btn search-btn " type="submit">
+                        <lord-icon class="ms-0" src="https://cdn.lordicon.com/xwvkumdr.json" trigger="hover"
+                            colors="primary:#fe424d,secondary:#fff,tertiary:#ffffff" style="width:20px;height:20px">
+
+                        </lord-icon>
+                        <div> Search </div>
+                    </button>
+                </form>
+            </div>
+
+
+
+            <div class="navbar-nav ms-auto mt-1">
+
+
+                <div class="d-flex flex-row inter" >
+                <lord-icon src="https://cdn.lordicon.com/heexevev.json" trigger="hover"
+                    colors="primary:#fe424d,secondary:#0d6efd,tertiary:#0d6efd,quaternary:#000000,quinary:#545454,senary:#fe424d"
+                    style="width:28px;height:28px" class="m-1">
+                </lord-icon>
+
+                <a class="nav-link " href="/listings/new">
+                    Add Your home
+                </a>
+
+               </div>
+
+
+                <% if(!Curruser){%>
+
+                    <a class="nav-link ms-2 inter " href="/signup"><b>Sign Up</b></a>
+                    <a class="nav-link ms-2 inter" href="/login"><b>Log in</b></a>
+                    <% } %>
+
+                        <% if(Curruser){ %>
+                            <h4 class="ms-2" >
+                                <%= Curruser.username %>
+                            </h4>
+                            <a class="nav-link ms-2 inter" href="/logout"><b>Log out</b></a>
+                            <% } %>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        
+
+         
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
@@ -121,3 +230,69 @@
         </div>
     </div>
 </nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+<script>
+    var menu=document.querySelector(".abc");
+
+    var cross=document.querySelector(".cross-icon");
+
+
+    var cross_t=gsap.timeline()
+    cross_t.to(".cross-icon",{
+       rotate:90,
+       duration:0.2,
+       delay:0
+
+     })
+     cross_t.pause();
+
+
+     var t1 =gsap.timeline()
+
+     t1.to(".navbar-inphone",{
+        x:"-80vw",
+        duration:0.45,
+        delay:0.1
+     })
+
+
+     t1.from(".navbar-inphone .navbar-nav .inter",{
+        x:"70%",
+        duration:0.4,
+        stagger:0.23,
+        opacity:0
+
+     })
+
+     t1.from(".navbar-inphone .cross",{
+        opacity:0
+     })
+
+     t1.pause();
+
+     
+    
+
+    cross.addEventListener("click",(e)=>{
+        cross_t.play();
+       t1.reverse();
+    })
+
+    
+      
+    
+
+     
+     
+     
+    menu.addEventListener("click",(e)=>{
+        t1.play();
+        cross_t.reverse();
+    })
+
+</script> 
